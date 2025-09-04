@@ -28,7 +28,7 @@
 
 		</label>
 		<!-- Auto Flash Panel -->
-		<div id="auto-panel" style="margin-top:12px; padding:8px; border:1px solid #ddd; border-radius:8px;">
+		<div id="auto-panel" style="display:none; margin-top:12px; padding:8px; border:1px solid #ddd; border-radius:8px;">
 		  <strong>Auto Flash</strong>
 		  <div style="margin-top:6px;">
 		    <label>Colors (comma):</label>
@@ -49,15 +49,6 @@
 		    <button id="btn-stop-auto">Stop</button>
 		  </div>
 		</div>
-		
-		<!-- 保底脚本：点击 Jane Wren 时确保面板显示 -->
-		<script>
-		  document.getElementById('control')?.addEventListener('click', () => {
-		    const p = document.getElementById('auto-panel');
-		    if (p) p.style.display = 'block';
-		  });
-		</script>
-
 	</div>
 
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css" />
