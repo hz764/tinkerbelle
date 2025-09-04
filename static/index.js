@@ -112,3 +112,57 @@ pause.onclick = () => {
   audio.pause();
 };
 audioIn.onkeyup = (e) => { if (e.keyCode === 13) { play.click(); } };
+
+
+// ===== Auto Flash 功能 =====
+function startAutoFromUI() {
+  const raw = document.getElementById('auto-colors').value.trim();
+  const colors = raw.split(',').map(s => s.trim()).filter(Boolean);
+  const stepMs = parseInt(document.getElementById('auto-step').value, 10) || 300;
+  const mode = document.getElementById('auto-mode').value;
+  const loop = document.getElementById('auto-loop').checked;
+
+  const cfg = { colors, stepMs, mode, loop, ease: (mode === 'fade') };
+  socket.emit('autoFlash', cfg);
+}
+
+function stopAutoFromUI() {
+  socket.emit('stopAuto', {});
+}
+
+document.getElementById('btn-start-auto').addEventListener('click', startAutoFromUI);
+document.getElementById('btn-stop-auto').addEventListener('click', stopAutoFromUI);
+
+// 当点击 Jane Wren 按钮时，显示 Auto Flash 面板
+document.getElementById('control').addEventListener('click', () => {
+  document.getElementById('auto-panel').style.display = 'block';
+});
+
+// 灯端接收自动闪烁配置
+let autoTimer = null;
+let autoIdx = 0;
+function applyColor(color, ease) {
+  document.body.style.transition = ease ? 'background-color 0.25s linear' : 'none';
+  document.body.style.backgroundColor = color;
+}
+function stopAuto() {
+  if (autoTimer) clearInterval(autoTimer);
+  autoTimer = null;
+  autoIdx = 0;
+}
+socket.on('autoFlash', (cfg) => {
+  stopAuto();
+  if (!cfg.colors || cfg.colors.length === 0) return;
+  applyColor(cfg.colors[0], cfg.ease);
+  if (cfg.colors.length === 1 && !cfg.loop) return;
+  autoTimer = setInterval(() => {
+    autoIdx += 1;
+    if (!cfg.loop && autoIdx >= cfg.colors.length) {
+      stopAuto();
+      return;
+    }
+    const color = cfg.colors[autoIdx % cfg.colors.length];
+    applyColor(color, cfg.mode === 'fade');
+  }, Math.max(50, cfg.stepMs || 300));
+});
+socket.on('stopAuto', stopAuto);
