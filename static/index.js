@@ -25,6 +25,7 @@ control.onclick = () => {
     document.exitFullscreen()
       .then(() => console.log('exited full screen mode'))
       .catch((err) => console.error(err));
+    document.getElementById('auto-panel')?.style.display = 'block';
   }
   // make buttons and controls visible
   document.getElementById('user').classList.remove('fadeOut');
