@@ -1,3 +1,4 @@
+console.log('index.js loaded v3');
 const control = document.getElementById('control');
 const light = document.getElementById('light');
 const play = document.getElementById('play');
