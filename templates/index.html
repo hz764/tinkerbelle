@@ -27,6 +27,28 @@
 			<button id='pause'>■</button>
 
 		</label>
+		<!-- Auto Flash Panel -->
+		<div id="auto-panel" style="display:none; margin-top:12px; padding:8px; border:1px solid #ddd; border-radius:8px;">
+		  <strong>Auto Flash</strong>
+		  <div style="margin-top:6px;">
+		    <label>Colors (comma):</label>
+		    <input id="auto-colors" value="#ff0000,#000000" style="width:260px;" />
+		    <label style="margin-left:8px;">Step (ms):</label>
+		    <input id="auto-step" type="number" value="300" style="width:90px;" />
+		    <label style="margin-left:8px;">Mode:</label>
+		    <select id="auto-mode">
+		      <option value="blink">blink</option>
+		      <option value="fade">fade</option>
+		    </select>
+		    <label style="margin-left:8px;">
+		      <input id="auto-loop" type="checkbox" checked /> Loop
+		    </label>
+		  </div>
+		  <div style="margin-top:8px;">
+		    <button id="btn-start-auto">Start Auto</button>
+		    <button id="btn-stop-auto">Stop</button>
+		  </div>
+		</div>
 	</div>
 
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css" />
