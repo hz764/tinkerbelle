@@ -3,7 +3,7 @@ from flask_socketio import SocketIO, send, emit
 import socket
 import sys
 
-port = 5001
+port = 5002
 
 app = Flask(__name__)
 socketio = SocketIO(app)
