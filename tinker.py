@@ -59,4 +59,4 @@ if __name__ == '__main__':
 		print(f"access at http://{ip}:{port}")
 	else:
 		print(f"No non-local IP found. Access may be available at http://127.0.0.1:{port}")
-	socketio.run(app, host='0.0.0.0', debug=True, port=port)
+	socketio.run(app, host='127.0.0.1', debug=False, port=port)
