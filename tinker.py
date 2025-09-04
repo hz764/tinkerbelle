@@ -40,6 +40,13 @@ def handle_audio(val):
 def handle_pause(val):
 	broadcast('pauseAudio', val)
 
+@socketio.on('autoFlash')
+def handle_auto_flash(cfg):
+    broadcast('autoFlash', cfg)
+
+@socketio.on('stopAuto')
+def handle_stop_auto(_val):
+    broadcast('stopAuto', {})
 
 @app.route('/')
 def index():
